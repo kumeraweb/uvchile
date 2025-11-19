@@ -6,7 +6,7 @@ const {
 } = Astro.props
 ---
 
-<section class="relative h-[60vh] w-full flex items-center text-white">
+<section class="relative w-full text-white pt-24 h-auto min-h-[80vh] flex items-center">
   <!-- Background -->
   <img src={bgImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
 
@@ -14,7 +14,7 @@ const {
   <div class="absolute inset-0 bg-black/60"></div>
 
   <!-- Content -->
-  <div class="relative px-6 md:pl-20 lg:pl-28 xl:pl-96 max-w-3xl xl:max-w-6xl">
+  <div class="relative px-6 md:px-10 lg:pl-20 xl:pl-28 max-w-3xl">
     <p class="tracking-widest text-gray-400 uppercase mb-4 text-sm">
       UV CHILE – REPRESENTACIONES & GESTIÓN COMERCIAL
     </p>
@@ -26,7 +26,5 @@ const {
     <p class="text-md text-gray-300 max-w-xl">
       {subtitle}
     </p>
-
-    <!-- Eliminado el botón por ahora -->
   </div>
 </section>
