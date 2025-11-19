@@ -1,0 +1,46 @@
+---
+import { Headset, ArrowUp } from 'lucide-astro'
+
+/* LINK A TU WHATSAPP */
+const whatsappLink = 'https://wa.me/56978698975'
+---
+
+<!-- Contenedor general de botones flotantes -->
+<div class="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
+  <!-- Botón WhatsApp (asesor corporativo) -->
+  <a
+    href={whatsappLink}
+    target="_blank"
+    class="bg-[#7E273E] hover:bg-[#651F34] text-white p-4 rounded-full shadow-lg
+           transition transform hover:-translate-y-1 flex items-center justify-center"
+    aria-label="Hablar con un asesor"
+  >
+    <Headset class="w-6 h-6" />
+  </a>
+
+  <!-- Botón Volver Arriba -->
+  <button
+    id="backToTop"
+    class="hidden bg-gray-800 hover:bg-gray-900 text-white p-4 rounded-full shadow-lg
+           transition transform hover:-translate-y-1"
+    aria-label="Volver arriba"
+  >
+    <ArrowUp class="w-6 h-6" />
+  </button>
+</div>
+
+<script is:inline>
+  const btn = document.getElementById('backToTop')
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      btn.classList.remove('hidden')
+    } else {
+      btn.classList.add('hidden')
+    }
+  })
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  })
+</script>

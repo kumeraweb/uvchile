@@ -1,0 +1,123 @@
+---
+import { Menu, X } from 'lucide-astro'
+
+const navLinks = [
+  { name: 'Inicio', href: '/' },
+  { name: 'Quiénes Somos', href: '#about' },
+  { name: 'Rubros', href: '#services' },
+  { name: 'Misión', href: '#mission' },
+  { name: 'Contacto', href: '#contact' }
+]
+---
+
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <img src="/uv-logo-nbg.png" alt="UV Chile Logo" class="w-8 h-8 object-contain" />
+      <span class="text-xl font-bold text-gray-800">UV Chile</span>
+    </div>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex gap-8 text-gray-700 font-medium">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hover:text-orange-600 transition">
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Desktop CTA -->
+    <a
+      href="#contact"
+      class="ml-6 hidden md:block bg-[#7E273E] hover:bg-[#651F34] text-white px-4 py-2 rounded-md transition"
+    >
+      Contacto
+    </a>
+
+    <!-- Mobile Button -->
+    <button id="openSidebar" class="md:hidden text-gray-800">
+      <Menu class="w-7 h-7" />
+    </button>
+  </div>
+</nav>
+
+<!-- Overlay -->
+<div
+  id="sidebarOverlay"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity"
+>
+</div>
+
+<!-- Sidebar -->
+<aside
+  id="mobileSidebar"
+  class="fixed top-0 right-0 w-64 h-full bg-white shadow-xl z-50 translate-x-full transition-transform"
+>
+  <div class="flex justify-between items-center p-4 border-b">
+    <div class="flex items-center gap-3">
+      <img src="/uv-logo-nbg.png" alt="UV Chile Logo" class="w-12 h-12 object-contain" />
+      <span class="text-lg font-semibold text-gray-800">UV Chile</span>
+    </div>
+
+    <button id="closeSidebar">
+      <X class="w-7 h-7 text-gray-700" />
+    </button>
+  </div>
+
+  <ul class="flex flex-col gap-6 p-6 text-gray-700 font-medium">
+    {
+      navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="block hover:text-[#651F34] transition" data-close-sidebar>
+            {link.name}
+          </a>
+        </li>
+      ))
+    }
+    <a
+      href="#contact"
+      class="bg-[#7E273E] hover:bg-[#651F34] text-white px-4 py-3 rounded-md text-center mt-4 transition"
+      data-close-sidebar
+    >
+      Contacto
+    </a>
+  </ul>
+</aside>
+
+<script is:inline>
+  const openBtn = document.getElementById('openSidebar')
+  const closeBtn = document.getElementById('closeSidebar')
+  const sidebar = document.getElementById('mobileSidebar')
+  const overlay = document.getElementById('sidebarOverlay')
+
+  const closeableLinks = document.querySelectorAll('[data-close-sidebar]')
+
+  // OPEN
+  openBtn.addEventListener('click', () => {
+    sidebar.classList.remove('translate-x-full')
+    overlay.classList.remove('hidden')
+    setTimeout(() => overlay.classList.add('opacity-100'))
+  })
+
+  // CLOSE (button, overlay, links)
+  closeBtn.addEventListener('click', closeMenu)
+  overlay.addEventListener('click', closeMenu)
+
+  closeableLinks.forEach((link) => {
+    link.addEventListener('click', closeMenu)
+  })
+
+  function closeMenu() {
+    sidebar.classList.add('translate-x-full')
+    overlay.classList.remove('opacity-100')
+
+    setTimeout(() => {
+      overlay.classList.add('hidden')
+    }, 200)
+  }
+</script>

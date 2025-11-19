@@ -1,0 +1,32 @@
+---
+const {
+  title = 'Soluciones Comerciales para Impulsar tu Empresa',
+  subtitle = 'Más de 5 años conectando a empresas con proveedores estratégicos en los sectores industrial, agrícola y de seguridad.',
+  bgImage = '/bg_b.png'
+} = Astro.props
+---
+
+<section class="relative h-[60vh] w-full flex items-center text-white">
+  <!-- Background -->
+  <img src={bgImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <!-- Content -->
+  <div class="relative px-6 md:pl-20 lg:pl-28 xl:pl-96 max-w-3xl xl:max-w-6xl">
+    <p class="tracking-widest text-gray-400 uppercase mb-4 text-sm">
+      UV CHILE – REPRESENTACIONES & GESTIÓN COMERCIAL
+    </p>
+
+    <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-4">
+      {title}
+    </h1>
+
+    <p class="text-md text-gray-300 max-w-xl">
+      {subtitle}
+    </p>
+
+    <!-- Eliminado el botón por ahora -->
+  </div>
+</section>
