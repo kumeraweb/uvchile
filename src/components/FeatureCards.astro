@@ -24,9 +24,28 @@ const features = [
 ---
 
 <section class="mt-2 md:-mt-16 relative z-20">
+  <!-- MOBILE: Floating sliding cards -->
+  <div class="md:hidden px-4 overflow-x-auto flex gap-4 snap-x snap-mandatory pb-4">
+    {
+      features
+        .filter((f) => f.title) // eliminamos el bloque en blanco
+        .map((item) => (
+          <div
+            class="min-w-[230px] snap-center bg-white shadow-md rounded-xl p-5
+                   flex items-center gap-3 shrink-0
+                   transition-transform duration-300 hover:-translate-y-1"
+          >
+            {item.icon && <item.icon class="w-7 h-7 text-blue-600 shrink-0" />}
+            <h3 class="text-sm font-semibold">{item.title}</h3>
+          </div>
+        ))
+    }
+  </div>
+
+  <!-- DESKTOP: Cards originales -->
   <div
-    class="max-w-6xl mx-auto
-    grid
+    class="hidden md:grid
+    max-w-6xl mx-auto
     grid-cols-1
     sm:grid-cols-2
     md:grid-cols-3
@@ -36,19 +55,14 @@ const features = [
     {
       features.map((item) => (
         <div
-          class={`
-    relative p-6 shadow-md bg-white transition duration-300 hover:shadow-lg hover:-translate-y-1
-    ${!item.title ? 'hidden lg:block' : ''}
-  `}
+          class={`relative p-6 shadow-md bg-white transition duration-300 hover:shadow-lg hover:-translate-y-1
+          ${!item.title ? 'hidden lg:block' : ''}`}
         >
-          {item.active && (
-            <div class="absolute top-0 left-0 w-full h-1 bg-blue-500 scale-x-0 transition-transform duration-300 group-hover:scale-x-100 origin-left" />
-          )}
+          {item.active && <div class="absolute top-0 left-0 w-full h-1 bg-blue-500" />}
 
           {item.title && (
             <>
               <div class="mb-4">{item.icon && <item.icon class="w-6 h-6 text-blue-600" />}</div>
-
               <h3 class="text-lg font-semibold mb-2">{item.title}</h3>
             </>
           )}

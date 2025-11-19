@@ -1,6 +1,8 @@
 ---
 import { Menu, X } from 'lucide-astro'
 
+const whatsappLink = 'https://wa.me/56978698975'
+
 const navLinks = [
   { name: 'Inicio', href: '/' },
   { name: 'Quiénes Somos', href: '#about' },
@@ -33,8 +35,9 @@ const navLinks = [
 
     <!-- Desktop CTA -->
     <a
-      href="#contact"
-      class="ml-6 hidden md:block bg-[#7E273E] hover:bg-[#651F34] text-white px-4 py-2 rounded-md transition"
+      href={whatsappLink}
+      target="_blank"
+      class="ml-6 hidden md:block bg-[#25D366] hover:bg-[#1EB65A] text-white px-4 py-2 rounded-md transition font-semibold"
     >
       Contacto
     </a>
@@ -80,8 +83,9 @@ const navLinks = [
       ))
     }
     <a
-      href="#contact"
-      class="bg-[#7E273E] hover:bg-[#651F34] text-white px-4 py-3 rounded-md text-center mt-4 transition"
+      href={whatsappLink}
+      target="_blank"
+      class="bg-[#25D366] hover:bg-[#1EB65A] text-white px-4 py-3 rounded-md text-center mt-4 transition font-semibold"
       data-close-sidebar
     >
       Contacto
