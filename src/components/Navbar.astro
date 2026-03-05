@@ -10,7 +10,7 @@ const navLinks = [
 
 <header
   id="site-header"
-  class="fixed top-0 left-0 right-0 z-50 mix-blend-normal"
+  class="fixed top-0 left-0 right-0 z-50 mix-blend-normal on-dark"
 >
   <div class="mx-auto max-w-[1400px] px-6 lg:px-10">
     <div
@@ -22,7 +22,7 @@ const navLinks = [
         <img
           src="/uv-logo-nbg.png"
           alt="UV Chile"
-          class="w-11 h-11 object-contain invert brightness-0 group-hover:opacity-70 transition-opacity"
+          class="w-11 h-11 object-contain nav-logo group-hover:opacity-70 transition-opacity duration-300"
         />
         <span
           class="text-[14px] font-semibold tracking-[0.15em] uppercase"
@@ -130,13 +130,14 @@ const navLinks = [
 
   /* Scrolled: solid dark bar */
   header.scrolled {
-    background: #0a0a0a;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
   }
   header.scrolled #logo-text,
   header.scrolled .nav-link,
   header.scrolled .nav-cta {
-    color: white;
-    border-color: rgba(255, 255, 255, 0.25);
+    color: #0a0a0a;
+    border-color: rgba(10, 10, 10, 0.25);
   }
   header.scrolled #nav-inner {
     padding-top: 1rem;
@@ -147,10 +148,11 @@ const navLinks = [
   }
 
   /* Logo invert control */
-  header.on-light img {
+  header.on-dark .nav-logo {
     filter: none !important;
   }
-  header.scrolled img {
+  header.on-light .nav-logo,
+  header.scrolled .nav-logo {
     filter: invert(1) brightness(0) !important;
   }
 </style>
