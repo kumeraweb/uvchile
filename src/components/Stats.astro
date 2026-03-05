@@ -1,42 +1,59 @@
 ---
-import { Users, Briefcase } from 'lucide-astro'
+const values = [
+  {
+    title: 'Red verificada',
+    body: 'Alianzas con proveedores validados y probados en el mercado chileno.',
+  },
+  {
+    title: 'Precisión sectorial',
+    body: 'Equipo especialista por rubro — no somos generalistas, somos especialistas.',
+  },
+  {
+    title: 'Optimización de costos',
+    body: 'Negociamos en nombre de nuestros clientes para obtener las mejores condiciones.',
+  },
+  {
+    title: 'Respuesta ágil',
+    body: 'Cumplimiento de plazos exigentes con acompañamiento directo en todo el proceso.',
+  },
+]
 ---
 
-<section id="stats" class="py-20 bg-white">
-  <div class="max-w-6xl mx-auto px-6 md:px-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-center md:text-left">
-      <!-- Clientes -->
-      <div class="flex flex-col items-center md:items-start animate-fade-up">
-        <Users class="w-10 h-10 text-blue-600 mb-4" />
-        <h3 class="text-5xl font-bold text-gray-900">300+</h3>
-        <p class="text-lg text-gray-700 mt-2">Clientes Satisfechos</p>
-      </div>
+<section id="diferencial" class="light-section bg-white py-28 lg:py-36">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
 
-      <!-- Proyectos -->
-      <div class="flex flex-col items-center md:items-start animate-fade-up md:animate-delay-150">
-        <Briefcase class="w-10 h-10 text-blue-600 mb-4" />
-        <h3 class="text-5xl font-bold text-gray-900">300+</h3>
-        <p class="text-lg text-gray-700 mt-2">Proyectos Realizados</p>
+    <!-- Header -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 pb-12 border-b border-[#e0dbd0]">
+      <div class="lg:col-span-5 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-6 h-px bg-[#c8a96e]"></div>
+          <span class="overline text-neutral-400">Nuestro Diferencial</span>
+        </div>
+        <h2 class="font-heading font-bold text-[clamp(2rem,4vw,3.2rem)] text-[#0a0a0a] leading-tight tracking-tight">
+          ¿Por qué trabajar con nosotros?
+        </h2>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7 flex items-end reveal reveal-delay-1">
+        <p class="text-[16px] text-neutral-500 leading-relaxed">
+          Contamos con la experiencia, la red y la metodología para resolver
+          los requerimientos más complejos de su operación.
+        </p>
       </div>
     </div>
+
+    <!-- Values grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#e0dbd0]">
+      {values.map((v, i) => (
+        <div class={`bg-white px-8 py-10 flex flex-col gap-4 hover:bg-[#f5f2ec] transition-colors duration-300 reveal reveal-delay-${i+1}`}>
+          <!-- Gold number -->
+          <span class="font-display italic text-[#c8a96e] text-[2.5rem] leading-none">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h3 class="font-heading font-bold text-[1.1rem] text-[#0a0a0a] tracking-tight">{v.title}</h3>
+          <p class="text-[14px] text-neutral-500 leading-relaxed flex-1">{v.body}</p>
+        </div>
+      ))}
+    </div>
+
   </div>
 </section>
-
-<style>
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .animate-fade-up {
-    animation: fade-up 0.6s ease-out forwards;
-  }
-  .animate-delay-150 {
-    animation-delay: 0.15s;
-  }
-</style>

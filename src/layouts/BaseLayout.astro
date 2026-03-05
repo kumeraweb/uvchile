@@ -1,46 +1,85 @@
 ---
-import '../styles/global.css'
-import Navbar from '../components/Navbar.astro'
-import FloatingButtons from '../components/FloatingButtons.astro'
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import FloatingButtons from "../components/FloatingButtons.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <title>UV CHILE</title>
+    <title>UV Chile — Representación & Gestión Comercial</title>
+    <meta
+      name="description"
+      content="UV Chile: empresa de representaciones y gestión comercial. Más de 5 años conectando empresas con proveedores estratégicos en industria, agricultura y seguridad."
+    />
+
+    <!-- Premium fonts: DM Serif Display + Manrope + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
 
-  <body class="bg-gray-50 font-sans">
+  <body>
     <Navbar />
-    <slot />
+    <main>
+      <slot />
+    </main>
+    <Footer />
     <FloatingButtons />
   </body>
+
   <script is:inline>
-    const elements = document.querySelectorAll('.reveal')
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active')
+    // Intersection observer for all reveal elements
+    const obs = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("active");
           }
-        })
-      },
-      {
-        threshold: 0.2
-      }
-    )
+        }),
+      { threshold: 0.1 },
+    );
+    document
+      .querySelectorAll(".reveal, .reveal-left")
+      .forEach((el) => obs.observe(el));
 
-    elements.forEach((el) => observer.observe(el))
+    // Animated number counter
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 1800;
+      const start = performance.now();
+      const update = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 4);
+        el.textContent =
+          Math.floor(ease * target).toLocaleString() +
+          (el.dataset.suffix || "");
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    const counterObs = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            animateCounter(e.target);
+            counterObs.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.5 },
+    );
+    document
+      .querySelectorAll("[data-target]")
+      .forEach((el) => counterObs.observe(el));
   </script>
 </html>

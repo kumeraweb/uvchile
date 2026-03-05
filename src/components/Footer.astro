@@ -1,0 +1,106 @@
+---
+const navLinks = [
+    { name: "Quiénes Somos", href: "#about" },
+    { name: "Rubros", href: "#services" },
+    { name: "Misión", href: "#mission" },
+    { name: "Diferencial", href: "#diferencial" },
+    { name: "Contacto", href: "#contact" },
+];
+---
+
+<footer class="bg-[#0a0a0a] border-t border-white/5">
+    <!-- Main footer grid -->
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Brand block -->
+            <div class="lg:col-span-4">
+                <div class="flex items-center gap-3 mb-6">
+                    <img
+                        src="/uv-logo-nbg.png"
+                        alt="UV Chile"
+                        class="w-7 h-7 object-contain opacity-80"
+                    />
+                    <span
+                        class="text-[12px] font-semibold tracking-[0.2em] uppercase text-white"
+                        >UV Chile</span
+                    >
+                </div>
+                <p
+                    class="text-[13px] text-white/30 leading-relaxed max-w-[260px]"
+                >
+                    Representación y gestión comercial. Conectando empresas con
+                    proveedores estratégicos desde 2019.
+                </p>
+                <div class="mt-8 flex items-center gap-3">
+                    <div class="w-6 h-px bg-[#c8a96e] opacity-60"></div>
+                    <span
+                        class="text-[11px] text-white/20 font-light italic font-display"
+                        >Chile</span
+                    >
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="lg:col-span-3 lg:col-start-6">
+                <p class="overline text-white/20 mb-6">Navegación</p>
+                <ul class="space-y-3">
+                    {
+                        navLinks.map((link) => (
+                            <li>
+                                <a
+                                    href={link.href}
+                                    class="text-[13px] text-white/40 hover:text-white transition-colors duration-200"
+                                >
+                                    {link.name}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="lg:col-span-3">
+                <p class="overline text-white/20 mb-6">Contacto</p>
+                <ul class="space-y-3">
+                    <li>
+                        <a
+                            href="https://wa.me/56978698975"
+                            target="_blank"
+                            class="text-[13px] text-white/40 hover:text-white transition-colors"
+                            >+56 9 7869 8975</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="mailto:contacto@uvchile.cl"
+                            class="text-[13px] text-white/40 hover:text-white transition-colors"
+                            >contacto@uvchile.cl</a
+                        >
+                    </li>
+                    <li>
+                        <span class="text-[13px] text-white/25">Chile</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-white/5">
+        <div
+            class="max-w-[1400px] mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row justify-between items-center gap-3"
+        >
+            <p class="text-[11px] text-white/20">
+                © {new Date().getFullYear()} UV Chile. Todos los derechos reservados.
+            </p>
+            <a
+                href="https://kumeraweb.com"
+                target="_blank"
+                class="text-[11px] text-white/15 hover:text-white/35 transition-colors tracking-wider"
+            >
+                Kumera Web
+            </a>
+        </div>
+    </div>
+</footer>

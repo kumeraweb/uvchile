@@ -1,127 +1,212 @@
 ---
-import { Menu, X } from 'lucide-astro'
-
-const whatsappLink = 'https://wa.me/56978698975'
+const whatsappLink = "https://wa.me/56978698975";
 
 const navLinks = [
-  { name: 'Inicio', href: '/' },
-  { name: 'Quiénes Somos', href: '#about' },
-  { name: 'Rubros', href: '#services' },
-  { name: 'Misión', href: '#mission' },
-  { name: 'Contacto', href: '#contact' }
-]
+  { name: "Nosotros", href: "#about" },
+  { name: "Rubros", href: "#services" },
+  { name: "Misión", href: "#mission" },
+];
 ---
 
-<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <!-- Logo -->
-    <div class="flex items-center gap-3">
-      <img src="/uv-logo-nbg.png" alt="UV Chile Logo" class="w-8 h-8 object-contain" />
-      <span class="text-xl font-bold text-gray-800">UV CHILE</span>
-    </div>
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 mix-blend-normal"
+>
+  <div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <div
+      id="nav-inner"
+      class="flex items-center justify-between py-6 transition-all duration-500"
+    >
+      <!-- Wordmark -->
+      <a href="/" class="flex items-center gap-3 group">
+        <img
+          src="/uv-logo-nbg.png"
+          alt="UV Chile"
+          class="w-11 h-11 object-contain invert brightness-0 group-hover:opacity-70 transition-opacity"
+        />
+        <span
+          class="text-[14px] font-semibold tracking-[0.15em] uppercase"
+          id="logo-text">UV Chile</span
+        >
+      </a>
 
-    <!-- Desktop Nav -->
-    <ul class="hidden md:flex gap-8 text-gray-700 font-medium">
+      <!-- Center links -->
+      <nav class="hidden md:flex items-center gap-8">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-[12px] font-medium tracking-widest uppercase nav-link transition-all duration-300"
+            >
+              {link.name}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- CTA -->
+      <div class="flex items-center gap-4">
+        <a
+          href={whatsappLink}
+          target="_blank"
+          class="hidden md:inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.15em] uppercase
+                 border border-current px-5 py-2.5 nav-cta transition-all duration-300 hover:opacity-70"
+        >
+          Contactar
+        </a>
+        <!-- Mobile hamburger -->
+        <button
+          id="menu-toggle"
+          class="md:hidden flex flex-col gap-1.5 nav-link"
+          aria-label="Menú"
+        >
+          <span
+            class="block w-5 h-px bg-current transition-all duration-300"
+            id="bar1"></span>
+          <span
+            class="block w-5 h-px bg-current transition-all duration-300"
+            id="bar2"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rule -->
+  <div
+    id="nav-rule"
+    class="h-px w-full bg-current opacity-0 transition-opacity duration-500"
+  >
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-40 bg-ink flex flex-col justify-end
+         translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+>
+  <div class="p-8 pb-16">
+    <ul class="space-y-2 mb-10">
       {
-        navLinks.map((link) => (
+        navLinks.map((link, i) => (
           <li>
-            <a href={link.href} class="hover:text-orange-600 transition">
+            <a
+              href={link.href}
+              class="block text-4xl font-bold text-white tracking-tight py-2 border-b border-white/10 mobile-nav-link"
+            >
               {link.name}
             </a>
           </li>
         ))
       }
     </ul>
-
-    <!-- Desktop CTA -->
     <a
       href={whatsappLink}
       target="_blank"
-      class="ml-6 hidden md:block bg-[#25D366] hover:bg-[#1EB65A] text-white px-4 py-2 rounded-md transition font-semibold"
+      class="inline-flex items-center gap-2 text-[11px] font-semibold tracking-widest uppercase
+             border border-white text-white px-6 py-3 mobile-nav-link"
     >
-      Contacto
+      Contactar
     </a>
-
-    <!-- Mobile Button -->
-    <button id="openSidebar" class="md:hidden text-gray-800">
-      <Menu class="w-7 h-7" />
-    </button>
   </div>
-</nav>
-
-<!-- Overlay -->
-<div
-  id="sidebarOverlay"
-  class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity"
->
 </div>
 
-<!-- Sidebar -->
-<aside
-  id="mobileSidebar"
-  class="fixed top-0 right-0 w-64 h-full bg-white shadow-xl z-50 translate-x-full transition-transform"
->
-  <div class="flex justify-between items-center p-4 border-b">
-    <div class="flex items-center gap-3">
-      <img src="/uv-logo-nbg.png" alt="UV Chile Logo" class="w-12 h-12 object-contain" />
-      <span class="text-lg font-semibold text-gray-800">UV CHILE</span>
-    </div>
+<style>
+  /* On dark hero: white text */
+  header.on-dark #logo-text,
+  header.on-dark .nav-link,
+  header.on-dark .nav-cta {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+  }
 
-    <button id="closeSidebar">
-      <X class="w-7 h-7 text-gray-700" />
-    </button>
-  </div>
+  /* On light sections: ink text */
+  header.on-light #logo-text,
+  header.on-light .nav-link,
+  header.on-light .nav-cta {
+    color: #0a0a0a;
+    border-color: rgba(10, 10, 10, 0.25);
+  }
 
-  <ul class="flex flex-col gap-6 p-6 text-gray-700 font-medium">
-    {
-      navLinks.map((link) => (
-        <li>
-          <a href={link.href} class="block hover:text-[#651F34] transition" data-close-sidebar>
-            {link.name}
-          </a>
-        </li>
-      ))
-    }
-    <a
-      href={whatsappLink}
-      target="_blank"
-      class="bg-[#25D366] hover:bg-[#1EB65A] text-white px-4 py-3 rounded-md text-center mt-4 transition font-semibold"
-      data-close-sidebar
-    >
-      Contacto
-    </a>
-  </ul>
-</aside>
+  /* Scrolled: solid dark bar */
+  header.scrolled {
+    background: #0a0a0a;
+  }
+  header.scrolled #logo-text,
+  header.scrolled .nav-link,
+  header.scrolled .nav-cta {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+  header.scrolled #nav-inner {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  header.scrolled #nav-rule {
+    opacity: 0.15;
+  }
+
+  /* Logo invert control */
+  header.on-light img {
+    filter: none !important;
+  }
+  header.scrolled img {
+    filter: invert(1) brightness(0) !important;
+  }
+</style>
 
 <script is:inline>
-  const openBtn = document.getElementById('openSidebar')
-  const closeBtn = document.getElementById('closeSidebar')
-  const sidebar = document.getElementById('mobileSidebar')
-  const overlay = document.getElementById('sidebarOverlay')
+  const header = document.getElementById("site-header");
+  const toggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const bar1 = document.getElementById("bar1");
+  const bar2 = document.getElementById("bar2");
+  let menuOpen = false;
 
-  const closeableLinks = document.querySelectorAll('[data-close-sidebar]')
+  // Detect hero section
+  const hero = document.getElementById("hero-section");
+  const lightSections = document.querySelectorAll(".light-section");
 
-  // OPEN
-  openBtn.addEventListener('click', () => {
-    sidebar.classList.remove('translate-x-full')
-    overlay.classList.remove('hidden')
-    setTimeout(() => overlay.classList.add('opacity-100'))
-  })
+  function updateHeader() {
+    const scrollY = window.scrollY;
 
-  // CLOSE (button, overlay, links)
-  closeBtn.addEventListener('click', closeMenu)
-  overlay.addEventListener('click', closeMenu)
+    if (scrollY > 80) {
+      header.classList.add("scrolled");
+      header.classList.remove("on-dark", "on-light");
+      return;
+    }
 
-  closeableLinks.forEach((link) => {
-    link.addEventListener('click', closeMenu)
-  })
+    header.classList.remove("scrolled");
 
-  function closeMenu() {
-    sidebar.classList.add('translate-x-full')
-    overlay.classList.remove('opacity-100')
-
-    setTimeout(() => {
-      overlay.classList.add('hidden')
-    }, 200)
+    // Check if a light section overlaps header
+    if (hero) {
+      header.classList.add("on-dark");
+      header.classList.remove("on-light");
+    } else {
+      header.classList.add("on-light");
+      header.classList.remove("on-dark");
+    }
   }
+
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
+
+  // Toggle mobile menu
+  toggle.addEventListener("click", () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle("translate-x-full", !menuOpen);
+    bar1.style.transform = menuOpen ? "translateY(5px) rotate(45deg)" : "";
+    bar2.style.transform = menuOpen ? "translateY(-2px) rotate(-45deg)" : "";
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+  });
+
+  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuOpen = false;
+      mobileMenu.classList.add("translate-x-full");
+      bar1.style.transform = "";
+      bar2.style.transform = "";
+      document.body.style.overflow = "";
+    });
+  });
 </script>

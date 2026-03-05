@@ -1,71 +1,46 @@
 ---
-import { Users, Network, TrendingDown, Layers } from 'lucide-astro'
-
-const features = [
-  {}, // bloque blanco angosto para diseño
+const metrics = [
   {
-    title: '+300 Clientes Satisfechos',
-    icon: Users,
-    active: true
+    value: 300,
+    suffix: "+",
+    label: "Clientes atendidos",
+    note: "Empresas y pymes",
   },
   {
-    title: 'Red de Proveedores Estratégicos',
-    icon: Network
+    value: 5,
+    suffix: "+",
+    label: "Años de experiencia",
+    note: "En el mercado",
   },
   {
-    title: 'Optimización de Costos Empresariales',
-    icon: TrendingDown
+    value: 4,
+    suffix: "",
+    label: "Sectores estratégicos",
+    note: "Industrial, agrícola, seguridad y gestión",
   },
-  {
-    title: 'Soluciones en Industria, Agricultura y Seguridad',
-    icon: Layers
-  }
-]
+  { value: 300, suffix: "+", label: "Proyectos ejecutados", note: "Con éxito" },
+];
 ---
 
-<section class="mt-2 md:-mt-16 relative z-20">
-  <!-- MOBILE: Floating sliding cards -->
-  <div class="md:hidden px-4 overflow-x-auto flex gap-4 snap-x snap-mandatory pb-4">
+<section class="light-section bg-[#f5f2ec] py-0">
+  <!-- Full-width grid with borders -->
+  <div class="grid grid-cols-2 md:grid-cols-4 border-b border-[#e0dbd0]">
     {
-      features
-        .filter((f) => f.title) // eliminamos el bloque en blanco
-        .map((item) => (
-          <div
-            class="min-w-[230px] snap-center bg-white shadow-md rounded-xl p-5
-                   flex items-center gap-3 shrink-0
-                   transition-transform duration-300 hover:-translate-y-1"
-          >
-            {item.icon && <item.icon class="w-7 h-7 text-blue-600 shrink-0" />}
-            <h3 class="text-sm font-semibold">{item.title}</h3>
-          </div>
-        ))
-    }
-  </div>
-
-  <!-- DESKTOP: Cards originales -->
-  <div
-    class="hidden md:grid
-    max-w-6xl mx-auto
-    grid-cols-1
-    sm:grid-cols-2
-    md:grid-cols-3
-    lg:grid-cols-[80px_repeat(4,1fr)]
-    gap-4"
-  >
-    {
-      features.map((item) => (
+      metrics.map((item, i) => (
         <div
-          class={`relative p-6 shadow-md bg-white transition duration-300 hover:shadow-lg hover:-translate-y-1
-          ${!item.title ? 'hidden lg:block' : ''}`}
+          class={`px-8 py-10 ${i < 3 ? "border-r border-[#e0dbd0]" : ""} reveal reveal-delay-${i + 1}`}
         >
-          {item.active && <div class="absolute top-0 left-0 w-full h-1 bg-blue-500" />}
-
-          {item.title && (
-            <>
-              <div class="mb-4">{item.icon && <item.icon class="w-6 h-6 text-blue-600" />}</div>
-              <h3 class="text-lg font-semibold mb-2">{item.title}</h3>
-            </>
-          )}
+          <p class="text-[11px] font-semibold tracking-widest uppercase text-neutral-400 mb-4">
+            {item.note}
+          </p>
+          <p class="text-[2.8rem] sm:text-[3.5rem] font-extrabold tracking-tight text-[#0a0a0a] leading-none">
+            <span data-target={item.value} data-suffix={item.suffix}>
+              0
+            </span>
+          </p>
+          <p class="text-[13px] text-neutral-500 mt-2 font-medium">
+            {item.label}
+          </p>
         </div>
       ))
     }

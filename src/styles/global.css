@@ -1,12 +1,182 @@
 @import 'tailwindcss';
 
+/* ═══════════════════════════════════════════════════════════════
+   UV CHILE — Premium Corporate Design System
+   Inspired by: Pentagram, McKinsey, Zaha Hadid Architects
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Core Palette */
+  --color-ink: #0a0a0a;
+  --color-ink-80: #141414;
+  --color-ink-60: #1f1f1f;
+  --color-paper: #f5f2ec;
+  --color-paper-dark: #ede9e0;
+  --color-white: #ffffff;
+  --color-rule: #e0dbd0;
+
+  /* Accent — single, precise */
+  --color-accent: #c8a96e;
+  /* warm gold — not cheap, not flashy */
+  --color-accent-alt: #8b6f3e;
+
+  /* Brand aliases for Tailwind */
+  --color-brand-950: #0a0a0a;
+  --color-brand-900: #141414;
+  --color-brand-800: #1f1f1f;
+  --color-brand-700: #2a2a2a;
+
+  --color-neutral-50: #fafaf9;
+  --color-neutral-100: #f5f2ec;
+  --color-neutral-200: #e8e3d9;
+  --color-neutral-300: #d6d0c4;
+  --color-neutral-400: #b5aca0;
+  --color-neutral-500: #8a8179;
+  --color-neutral-600: #67615a;
+  --color-neutral-700: #4a453f;
+  --color-neutral-800: #332f2a;
+  --color-neutral-900: #1f1c18;
+
+  /* Typography */
+  --font-display: 'DM Serif Display', 'Georgia', serif;
+  --font-heading: 'Manrope', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-ink);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Headings — no forced color, let sections control */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+/* Display headings — serif */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* ── Cursor ── */
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* ── Horizontal Rule ── */
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--color-rule);
+}
+
+/* ── Reveal Animations ── */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(28px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* Slide from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink);
+}
+
+/* ── Premium Overline ── */
+.overline {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+/* ── Number counter animation ── */
+@keyframes count-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.number-visible {
+  animation: count-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
